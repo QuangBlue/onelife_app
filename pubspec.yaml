@@ -2,23 +2,28 @@ name: onelife_app
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
-environment: 
-  sdk: '>=2.19.0-444.4.beta <3.0.0'
+environment:
+  sdk: ">=2.19.0-444.4.beta <3.0.0"
 
-dependencies: 
+dependencies:
   cupertino_icons: ^1.0.2
   get: 4.6.5
-  flutter: 
+  flutter:
     sdk: flutter
   graphql_flutter: ^5.1.2
   logger: ^1.1.0
   get_storage: ^2.0.3
+  cached_network_image: ^3.2.3
+  flutter_svg: ^1.1.6
 
-dev_dependencies: 
+dev_dependencies:
   flutter_lints: ^2.0.0
-  flutter_test: 
+  flutter_test:
     sdk: flutter
 
-flutter: 
+flutter:
   uses-material-design: true
-
+  assets:
+    - assets/
+    - assets/images/
+    - assets/icons/

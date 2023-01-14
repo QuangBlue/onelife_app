@@ -1,23 +1,12 @@
 import 'package:get/get.dart';
+import 'package:onelife_app/app/data/providers/text_graphql.dart';
 
-class HomeController extends GetxController {
-  //TODO: Implement HomeController
+class HomeController extends GetxController with TextGraphQLProvider {
+  double positionProgressBarPoint(double value) =>
+      value * (Get.width - 66 - 20) / 10;
+  double positionProgressBar(double value) => value * (Get.width - 46) / 10;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
+  void handlePressScanQr() {}
+  void handlePressVouhcer() {}
+  void handlePressTopUp() {}
 }
