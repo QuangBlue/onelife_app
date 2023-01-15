@@ -24,31 +24,134 @@ class HomeView extends GetView<HomeController> {
           vertical: 24,
         ),
         child: Column(
-          children: [
-            const _CardSection(),
-            const SizedBox(
-              height: 16,
-            ),
-            Container(
-              height: 133,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: const Color(0xFFCBD5E0),
-                ),
-              ),
-              child: Column(
-                children: const [
-                  SizedBox(
-                    height: 12,
-                  ),
-                  ProgressBar(),
-                ],
-              ),
-            )
+          children: const [
+            _CardSection(),
+            SizedBox(height: 16),
+            _MemberInfo(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _MemberInfo extends StatelessWidget {
+  const _MemberInfo();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 12,
+      ),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: const Color(0xFFCBD5E0),
+        ),
+      ),
+      child: Column(
+        children: [
+          const ProgressBar(),
+          const SizedBox(
+            height: 8,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: RichText(
+              text: const TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Thêm',
+                    style: TextStyle(
+                      color: Color(0xFF718096),
+                      fontSize: 12,
+                    ),
+                  ),
+                  TextSpan(
+                    text: ' 500.000 đ ',
+                    style: TextStyle(
+                      color: Color(0xFF39A26A),
+                      fontSize: 12,
+                    ),
+                  ),
+                  TextSpan(
+                    text: 'để đạt OneLife Club',
+                    style: TextStyle(
+                      color: Color(0xFF718096),
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const Divider(
+            color: Color(0xFFCBD5E0),
+            thickness: 1,
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Row(
+                children: const [
+                  SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircleAvatar(
+                      backgroundColor: Color(0xFFE6F1FF),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    'Quyền lợi hạng',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+                child: VerticalDivider(
+                  thickness: 1,
+                  color: Color(0xFFCBD5E0),
+                ),
+              ),
+              Row(
+                children: const [
+                  SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircleAvatar(
+                      backgroundColor: Color(0xFFE6F1FF),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    'Đổi thưởng',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+        ],
       ),
     );
   }
@@ -63,27 +166,47 @@ class ProgressBar extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 22),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              TextProgressBar(text: '0'),
-              TextProgressBar(text: '0.5tr', isShow: false),
-              TextProgressBar(text: '  1tr'),
-              TextProgressBar(text: '1.5tr'),
-              TextProgressBar(text: '2tr', isShow: false),
-              TextProgressBar(text: '2.5tr', isShow: false),
-              TextProgressBar(text: '3tr'),
-              TextProgressBar(text: '3.5tr', isShow: false),
-              TextProgressBar(text: '4tr', isShow: false),
-              TextProgressBar(text: '4.5tr', isShow: false),
-              TextProgressBar(text: '5tr'),
-            ],
-          ),
-        ),
         const SizedBox(
           height: 4,
+        ),
+        Container(
+          height: 22,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.all(1),
+          child: Stack(
+            children: [
+              Positioned(
+                left: controller.positionProgressBarPoint(0),
+                width: 20,
+                height: 20,
+                child: const TextProgressBar(text: '0'),
+              ),
+              Positioned(
+                left: controller.positionProgressBarPoint(2),
+                width: 20,
+                height: 20,
+                child: const TextProgressBar(text: '1tr'),
+              ),
+              Positioned(
+                left: controller.positionProgressBarPoint(3),
+                width: 24,
+                height: 20,
+                child: const TextProgressBar(text: '1.5tr'),
+              ),
+              Positioned(
+                left: controller.positionProgressBarPoint(6),
+                width: 20,
+                height: 20,
+                child: const TextProgressBar(text: '3tr'),
+              ),
+              Positioned(
+                left: controller.positionProgressBarPoint(10),
+                width: 20,
+                height: 20,
+                child: const TextProgressBar(text: '5tr'),
+              ),
+            ],
+          ),
         ),
         Container(
           height: 22,
@@ -103,7 +226,7 @@ class ProgressBar extends GetView<HomeController> {
           child: Stack(
             children: [
               Positioned(
-                width: controller.positionProgressBar(5),
+                width: controller.positionProgressBar(3),
                 height: 20,
                 child: Container(
                   decoration: BoxDecoration(
@@ -113,7 +236,7 @@ class ProgressBar extends GetView<HomeController> {
                 ),
               ),
               Positioned(
-                left: controller.positionProgressBarPoint(5),
+                left: controller.positionProgressBarPoint(3),
                 width: 20,
                 height: 20,
                 child: Container(
@@ -128,21 +251,35 @@ class ProgressBar extends GetView<HomeController> {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  IconProgressBar(color: Color(0xFFFF7600)),
-                  IconProgressBar(color: Colors.transparent, isShow: false),
-                  IconProgressBar(color: Color(0xFF3280F6)),
-                  IconProgressBar(color: Color(0xFFD69E2E)),
-                  IconProgressBar(color: Colors.transparent, isShow: false),
-                  IconProgressBar(color: Colors.transparent, isShow: false),
-                  IconProgressBar(color: Color(0xFF805AD5)),
-                  IconProgressBar(color: Colors.transparent, isShow: false),
-                  IconProgressBar(color: Colors.transparent, isShow: false),
-                  IconProgressBar(color: Colors.transparent, isShow: false),
-                  IconProgressBar(color: Color(0xFF4A5568)),
-                ],
+              Positioned(
+                left: controller.positionProgressBarPoint(0),
+                width: 20,
+                height: 20,
+                child: const IconProgressBar(color: Color(0xFFFF7600)),
+              ),
+              Positioned(
+                left: controller.positionProgressBarPoint(2),
+                width: 20,
+                height: 20,
+                child: const IconProgressBar(color: Color(0xFF3280F6)),
+              ),
+              Positioned(
+                left: controller.positionProgressBarPoint(3),
+                width: 20,
+                height: 20,
+                child: const IconProgressBar(color: Color(0xFFD69E2E)),
+              ),
+              Positioned(
+                left: controller.positionProgressBarPoint(6),
+                width: 20,
+                height: 20,
+                child: const IconProgressBar(color: Color(0xFF805AD5)),
+              ),
+              Positioned(
+                left: controller.positionProgressBarPoint(10),
+                width: 20,
+                height: 20,
+                child: const IconProgressBar(color: Color(0xFF4A5568)),
               ),
             ],
           ),
@@ -164,12 +301,15 @@ class TextProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: 10,
-        fontWeight: FontWeight.w600,
-        color: isShow ? const Color(0xFF718096) : Colors.transparent,
+    return Center(
+      child: Text(
+        text,
+        maxLines: 1,
+        style: TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.w600,
+          color: isShow ? const Color(0xFF718096) : Colors.transparent,
+        ),
       ),
     );
   }
