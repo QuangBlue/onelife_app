@@ -3,7 +3,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:onelife_app/app/common/logger/app_logger.dart';
 import 'package:onelife_app/app/data/graphql_service.dart';
 import 'package:onelife_app/app/data/models/popular_category_model.dart';
-import 'package:onelife_app/app/data/providers/graphql_strings.dart';
+import 'package:onelife_app/app/data/graphql_strings.dart';
 
 class TextGraphQLProvider {
   final GraphQLClient qlClient = Get.find<GraphQLService>().qlClient;
@@ -13,7 +13,7 @@ class TextGraphQLProvider {
       QueryOptions(
         fetchPolicy: FetchPolicy.networkOnly,
         document: gql(
-          popularCategory,
+          popularCategoryQuery,
         ),
       ),
     );

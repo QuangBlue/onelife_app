@@ -9,4 +9,5 @@ abstract class AppImages {
   static const String artboardCard = '${_baseAsset}artboard_card.svg';
   static const String kfRange = '${_baseAsset}kf_range.svg';
   static const String fillter = '${_baseAsset}fillter.svg';
+  static const String oneLifeLogo = '${_baseAsset}one_life_logo.svg';
 }
