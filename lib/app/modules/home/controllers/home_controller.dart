@@ -8,11 +8,8 @@ class HomeController extends GetxController with TextGraphQLProvider {
 
   @override
   void onReady() {
-    // print(key.currentContext!.size!.height);
     height.value = key.currentContext?.size?.height ?? 0;
 
-    print(height);
-    print(Get.height);
     super.onReady();
   }
 
@@ -23,5 +20,7 @@ class HomeController extends GetxController with TextGraphQLProvider {
 
   void handlePressScanQr() {}
   void handlePressVouhcer() {}
-  void handlePressTopUp() {}
+  void handlePressTopUp() {
+    textFunc();
+  }
 }

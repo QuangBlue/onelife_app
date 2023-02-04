@@ -19,117 +19,115 @@ class HomeView extends GetView<HomeController> {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: Obx(
-        () => SlidingUpPanel(
-          minHeight: Get.height - 560,
-          maxHeight: Get.height -
-              (MediaQuery.of(context).padding.top + kToolbarHeight),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              blurRadius: 4.0,
-              color: Colors.black.withOpacity(0.05),
-            )
-          ],
-          borderRadius: BorderRadius.circular(10),
-          panelBuilder: () => SingleChildScrollView(
-            child: Column(
-              children: [
-                // HEADER
-                Container(
-                  height: 4,
-                  width: 50,
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFDCE3E8),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
+      body: SlidingUpPanel(
+        minHeight: Get.height - 560,
+        maxHeight:
+            Get.height - (MediaQuery.of(context).padding.top + kToolbarHeight),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            blurRadius: 4.0,
+            color: Colors.black.withOpacity(0.05),
+          )
+        ],
+        borderRadius: BorderRadius.circular(10),
+        panelBuilder: () => SingleChildScrollView(
+          child: Column(
+            children: [
+              // HEADER
+              Container(
+                height: 4,
+                width: 50,
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFDCE3E8),
+                  borderRadius: BorderRadius.circular(100),
                 ),
+              ),
 
-                // SEARCH - FILLTER
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Lịch sử',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF718096),
+              // SEARCH - FILLTER
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Lịch sử',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF718096),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        CustomImage.asset(
+                          AppImages.fillter,
+                          color: const Color(0xFF3280F6),
+                        ),
+                        const SizedBox(width: 4),
+                        const Text(
+                          'Lọc (1)',
+                          style: TextStyle(
+                            color: Color(0xFF3280F6),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+
+              // TAB
+              DefaultTabController(
+                length: 3,
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                          border: Border(
+                        bottom: BorderSide(
+                          color: Color(0xFFE2E8F0),
+                          width: 1.0,
+                        ),
+                      )),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: TabBar(
+                          indicatorColor: Color(0xFF3280F6),
+                          labelStyle: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          labelColor: Color(0xFF3280F6),
+                          unselectedLabelColor: Color(0xFF5F6368),
+                          tabs: [
+                            Tab(text: 'Tất cả'),
+                            Tab(text: 'Giao dịch'),
+                            Tab(text: 'Nạp thẻ'),
+                          ],
                         ),
                       ),
-                      Row(
-                        children: [
-                          CustomImage.asset(
-                            AppImages.fillter,
-                            color: const Color(0xFF3280F6),
-                          ),
-                          const SizedBox(width: 4),
-                          const Text(
-                            'Lọc (1)',
-                            style: TextStyle(
-                              color: Color(0xFF3280F6),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-
-                // TAB
-                DefaultTabController(
-                  length: 3,
-                  child: Column(
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                            border: Border(
-                          bottom: BorderSide(
-                            color: Color(0xFFE2E8F0),
-                            width: 1.0,
-                          ),
-                        )),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          child: TabBar(
-                            indicatorColor: Color(0xFF3280F6),
-                            labelStyle: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            labelColor: Color(0xFF3280F6),
-                            unselectedLabelColor: Color(0xFF5F6368),
-                            tabs: [
-                              Tab(text: 'Tất cả'),
-                              Tab(text: 'Giao dịch'),
-                              Tab(text: 'Nạp thẻ'),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 24,
-            ),
-            child: Column(
-              key: controller.key,
-              children: const [
-                _CardSection(),
-                SizedBox(height: 16),
-                _MemberInfo(),
-              ],
-            ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 24,
+          ),
+          child: Column(
+            key: controller.key,
+            children: const [
+              _CardSection(),
+              SizedBox(height: 16),
+              _MemberInfo(),
+            ],
           ),
         ),
       ),
