@@ -20,6 +20,7 @@ void main() {
         initialRoute: AppPages.INITIAL,
         initialBinding: GlobalBinding(),
         getPages: AppPages.routes,
+        defaultTransition: Transition.fade,
       ),
     );
   }, (error, stackTrace) {
