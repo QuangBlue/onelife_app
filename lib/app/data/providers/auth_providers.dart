@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:onelife_app/app/common/logger/app_logger.dart';
+import 'package:onelife_app/app/common/utils/snackbar_util.dart';
 import 'package:onelife_app/app/data/graphql_service.dart';
 import 'package:onelife_app/app/data/graphql_strings.dart';
 import 'package:onelife_app/app/data/models/send_otp_model.dart';
@@ -26,18 +27,15 @@ class AuthProvider {
     AppLogger.i(queryResult.data);
 
     if (queryResult.data == null) {
-      Get.snackbar(
-        "Đã xảy ra lỗi !",
-        queryResult.exception?.graphqlErrors.first.message ?? '',
-      );
+      SnackbarUtil.showErrSnackbar(
+          queryResult.exception?.graphqlErrors.first.message ?? '');
+    } else {
+      final SendOtpModel response =
+          SendOtpModel.fromJson(queryResult.data!['sendOtp']);
+
+      return response;
     }
-
-    final SendOtpModel response =
-        SendOtpModel.fromJson(queryResult.data!['sendOtp']);
-
-    AppLogger.i(response.toJson());
-
-    return response;
+    return SendOtpModel();
   }
 
   Future<VerifyOtpInputModel> verifyOtpInput(
@@ -58,17 +56,14 @@ class AuthProvider {
     AppLogger.i(queryResult.data);
 
     if (queryResult.data == null) {
-      Get.snackbar(
-        "Đã xảy ra lỗi !",
-        queryResult.exception?.graphqlErrors.first.message ?? '',
-      );
+      SnackbarUtil.showErrSnackbar(
+          queryResult.exception?.graphqlErrors.first.message ?? '');
+    } else {
+      final VerifyOtpInputModel response =
+          VerifyOtpInputModel.fromJson(queryResult.data!['verifyOtp']);
+      return response;
     }
 
-    final VerifyOtpInputModel response =
-        VerifyOtpInputModel.fromJson(queryResult.data!['verifyOtp']);
-
-    AppLogger.i(response.toJson());
-
-    return response;
+    return VerifyOtpInputModel();
   }
 }

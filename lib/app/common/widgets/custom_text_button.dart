@@ -103,7 +103,7 @@ class _BaseButtonState extends State<BaseButton> {
           child: isLoading
               ? CustomSpinKitThreeFading(
                   color: AppColors.white,
-                  size: 12,
+                  size: 10,
                 )
               : widget.child,
         ),

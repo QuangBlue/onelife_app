@@ -79,6 +79,7 @@ class LoginView extends GetView<LoginController> {
               ),
               CustomButton(
                 onPressed: controller.handleLogin,
+                showLoading: true,
                 child: const Text(
                   'Tiếp tục',
                   style: TextStyle(

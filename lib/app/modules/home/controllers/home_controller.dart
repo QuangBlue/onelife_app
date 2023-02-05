@@ -4,7 +4,6 @@ import 'package:onelife_app/app/common/utils/utils.dart';
 import 'package:onelife_app/app/data/models/me_model.dart';
 import 'package:onelife_app/app/data/providers/text_graphql.dart';
 import 'package:onelife_app/app/data/services/user_service.dart';
-import 'package:onelife_app/app/modules/home/views/home_view.dart';
 import 'package:onelife_app/app/modules/home/views/widgets/body_account.dart';
 import 'package:onelife_app/app/modules/home/views/widgets/body_home.dart';
 import 'package:onelife_app/app/modules/home/views/widgets/body_qr.dart';
@@ -40,7 +39,7 @@ class HomeController extends GetxController with TextGraphQLProvider {
   double positionProgressBarPoint(double value) =>
       value * (Get.width - 64 - 24) / 10;
   double positionProgressBar(double value) =>
-      value * (Get.width - 64 - 24) / 10 + 22;
+      value * (Get.width - 64 - 24) / 10 + 21;
 
   void handlePressScanQr() {
     final bool checkAuth = Utils.checkIsAuth();
