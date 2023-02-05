@@ -1,7 +1,7 @@
-import 'package:onelife_app/app/data/models/send_otp.dart';
+import 'package:onelife_app/app/data/models/send_otp_model.dart';
 
 class LoginPinCodeArguments {
   LoginPinCodeArguments({required this.sendOtp});
 
-  final SendOtp sendOtp;
+  final SendOtpModel sendOtp;
 }

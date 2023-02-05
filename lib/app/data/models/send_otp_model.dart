@@ -1,11 +1,11 @@
-class SendOtp {
+class SendOtpModel {
   int? expiresIn;
   bool? forceSecurityCheck;
   String? otpTrackingId;
 
-  SendOtp({this.expiresIn, this.forceSecurityCheck, this.otpTrackingId});
+  SendOtpModel({this.expiresIn, this.forceSecurityCheck, this.otpTrackingId});
 
-  SendOtp.fromJson(Map<String, dynamic> json) {
+  SendOtpModel.fromJson(Map<String, dynamic> json) {
     expiresIn = json['expiresIn'];
     forceSecurityCheck = json['forceSecurityCheck'];
     otpTrackingId = json['otpTrackingId'];

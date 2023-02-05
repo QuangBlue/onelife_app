@@ -1,9 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onelife_app/app/common/values/app_colors.dart';
+import 'package:onelife_app/app/common/values/app_icons.dart';
 
 import 'package:onelife_app/app/common/values/app_images.dart';
 import 'package:onelife_app/app/common/widgets/custom_image.dart';
+import 'package:onelife_app/app/common/widgets/custom_text_button.dart';
+import 'package:onelife_app/app/common/widgets/unordered.dart';
 import 'package:sliding_up_panel2/sliding_up_panel2.dart';
 
 import '../controllers/home_controller.dart';
@@ -20,7 +24,8 @@ class HomeView extends GetView<HomeController> {
         elevation: 0,
       ),
       body: SlidingUpPanel(
-        minHeight: Get.height - 560,
+        minHeight:
+            controller.me.value.id?.isNotEmpty ?? false ? Get.height - 560 : 0,
         maxHeight:
             Get.height - (MediaQuery.of(context).padding.top + kToolbarHeight),
         boxShadow: <BoxShadow>[
@@ -135,7 +140,7 @@ class HomeView extends GetView<HomeController> {
   }
 }
 
-class _MemberInfo extends StatelessWidget {
+class _MemberInfo extends GetView<HomeController> {
   const _MemberInfo();
 
   @override
@@ -157,36 +162,9 @@ class _MemberInfo extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: RichText(
-              text: const TextSpan(
-                children: [
-                  TextSpan(
-                    text: 'Thêm',
-                    style: TextStyle(
-                      color: Color(0xFF718096),
-                      fontSize: 12,
-                    ),
-                  ),
-                  TextSpan(
-                    text: ' 500.000 đ ',
-                    style: TextStyle(
-                      color: Color(0xFF39A26A),
-                      fontSize: 12,
-                    ),
-                  ),
-                  TextSpan(
-                    text: 'để đạt OneLife Club',
-                    style: TextStyle(
-                      color: Color(0xFF718096),
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          controller.me.value.id?.isNotEmpty ?? false
+              ? const _DescriptionForMember()
+              : const _DescriptionForNonMember(),
           const Divider(
             color: Color(0xFFCBD5E0),
             thickness: 1,
@@ -195,21 +173,18 @@ class _MemberInfo extends StatelessWidget {
             height: 8,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Row(
-                children: const [
-                  SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: CircleAvatar(
-                      backgroundColor: Color(0xFFE6F1FF),
-                    ),
+                children: [
+                  CustomImage.asset(
+                    AppIcons.icVipDiamond,
+                    color: AppColors.primaryColor,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                   ),
-                  Text(
+                  const Text(
                     'Quyền lợi hạng',
                     style: TextStyle(
                       fontSize: 14,
@@ -226,18 +201,16 @@ class _MemberInfo extends StatelessWidget {
                 ),
               ),
               Row(
-                children: const [
-                  SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: CircleAvatar(
-                      backgroundColor: Color(0xFFE6F1FF),
-                    ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomImage.asset(
+                    AppIcons.icVipCrown,
+                    color: AppColors.yellow,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                   ),
-                  Text(
+                  const Text(
                     'Đổi thưởng',
                     style: TextStyle(
                       fontSize: 14,
@@ -257,6 +230,86 @@ class _MemberInfo extends StatelessWidget {
   }
 }
 
+class _DescriptionForNonMember extends GetView<HomeController> {
+  const _DescriptionForNonMember();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: [
+          const Text(
+            'Tham gia chương trình thành viên khi thanh toán bằng Thẻ OneLife - Kingfoodmart',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          const UnorderedList([
+            'Hưởng Freeship khi dùng App',
+            'x2, x3, x4, x5 tích điểm tùy hạng',
+            'Ưu đãi đặc quyền cho từng hạng'
+          ]),
+          const SizedBox(
+            height: 8,
+          ),
+          const Text(
+            'Chương trình hạng thành viên chỉ áp dụng cho KH thanh toán bằng Thẻ OneLife - Kingfoodmart',
+            style: TextStyle(fontSize: 12),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          CustomButton.text(
+              onPressed: controller.handlePressTopUp, title: 'Nạp tiền vào Thẻ')
+        ],
+      ),
+    );
+  }
+}
+
+class _DescriptionForMember extends StatelessWidget {
+  const _DescriptionForMember();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: RichText(
+        text: const TextSpan(
+          children: [
+            TextSpan(
+              text: 'Thêm',
+              style: TextStyle(
+                color: Color(0xFF718096),
+                fontSize: 12,
+              ),
+            ),
+            TextSpan(
+              text: ' 500.000 đ ',
+              style: TextStyle(
+                color: Color(0xFF39A26A),
+                fontSize: 12,
+              ),
+            ),
+            TextSpan(
+              text: 'để đạt OneLife Club',
+              style: TextStyle(
+                color: Color(0xFF718096),
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class ProgressBar extends GetView<HomeController> {
   const ProgressBar({
     super.key,
@@ -270,11 +323,43 @@ class ProgressBar extends GetView<HomeController> {
           height: 4,
         ),
         Container(
-          height: 22,
+          height: 40,
           margin: const EdgeInsets.symmetric(horizontal: 16),
           padding: const EdgeInsets.all(1),
           child: Stack(
+            alignment: AlignmentDirectional.bottomStart,
             children: [
+              Positioned(
+                top: 0,
+                left: controller.positionProgressBarPoint(8) - 46,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: Text(
+                    'x5 tích điểm, ...',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 6,
+                left: controller.positionProgressBarPoint(8) - 8,
+                child: Icon(
+                  Icons.arrow_drop_down_sharp,
+                  color: AppColors.primaryColor,
+                  size: 38,
+                ),
+              ),
               Positioned(
                 left: controller.positionProgressBarPoint(0),
                 width: 20,
@@ -326,7 +411,7 @@ class ProgressBar extends GetView<HomeController> {
           child: Stack(
             children: [
               Positioned(
-                width: controller.positionProgressBar(3),
+                width: controller.positionProgressBar(8),
                 height: 20,
                 child: Container(
                   decoration: BoxDecoration(
@@ -336,7 +421,7 @@ class ProgressBar extends GetView<HomeController> {
                 ),
               ),
               Positioned(
-                left: controller.positionProgressBarPoint(3),
+                left: controller.positionProgressBarPoint(8),
                 width: 20,
                 height: 20,
                 child: Container(
@@ -383,7 +468,28 @@ class ProgressBar extends GetView<HomeController> {
               ),
             ],
           ),
-        )
+        ),
+        Container(
+          height: 20,
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.all(1),
+          child: Stack(
+            children: [
+              Positioned(
+                left: controller.positionProgressBarPoint(7) + 20,
+                height: 20,
+                child: Text(
+                  'Bạch kim',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: AppColors.green,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -484,29 +590,33 @@ class _CardBottom extends GetView<HomeController> {
       padding: const EdgeInsets.all(16.0),
       child: Row(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text(
-                'Thành viên Cơ bản',
-                style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(
-                height: 6,
-              ),
-              Text(
-                '3.200 điểm tích lũy',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-              )
-            ],
+          Obx(
+            () => controller.me.value.id?.isNotEmpty ?? false
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Thành viên Cơ bản',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      Text(
+                        '3.200 điểm tích lũy',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
+                  )
+                : const SizedBox.shrink(),
           ),
           const Spacer(),
           GestureDetector(
@@ -547,7 +657,7 @@ class _CardBottom extends GetView<HomeController> {
   }
 }
 
-class _CardTop extends StatelessWidget {
+class _CardTop extends GetView<HomeController> {
   const _CardTop();
 
   @override
@@ -584,29 +694,35 @@ class _CardTop extends StatelessWidget {
             height: 16,
           ),
           const Spacer(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: const [
-              Text(
-                '500.000 đ',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
+          Obx(
+            () => Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  controller.me.value.id?.isNotEmpty ?? false
+                      ? '500.000 đ'
+                      : '0 đ',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 4,
-              ),
-              Text(
-                'Hết hạn: 30/03/2025',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white,
+                const SizedBox(
+                  height: 4,
                 ),
-              ),
-            ],
+                controller.me.value.id?.isNotEmpty ?? false
+                    ? const Text(
+                        'Hết hạn: 30/03/2025',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+              ],
+            ),
           )
         ],
       ),
@@ -621,15 +737,19 @@ class _AppBarSection extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const CircleAvatar(
-          backgroundColor: Color(0xFF805AD5),
-          child: Text(
-            'H',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+        Obx(
+          () => controller.me.value.id?.isNotEmpty ?? false
+              ? const CircleAvatar(
+                  backgroundColor: Color(0xFF805AD5),
+                  child: Text(
+                    'H',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink(),
         ),
         const Spacer(),
         GestureDetector(

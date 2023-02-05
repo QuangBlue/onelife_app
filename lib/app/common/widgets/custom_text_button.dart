@@ -39,7 +39,7 @@ abstract class BaseButton extends StatefulWidget {
     this.radius,
     this.padding,
     this.onPressed,
-    this.buttonSize = ButtonSizeEnum.LARGE,
+    this.buttonSize = ButtonSizeEnum.SMALL,
   }) : super(key: key);
 
   @override
