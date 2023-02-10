@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onelife_app/app/common/utils/utils.dart';
 import 'package:onelife_app/app/data/models/me_model.dart';
-import 'package:onelife_app/app/data/providers/text_graphql.dart';
 import 'package:onelife_app/app/data/services/user_service.dart';
 import 'package:onelife_app/app/modules/home/views/widgets/body_account.dart';
 import 'package:onelife_app/app/modules/home/views/widgets/body_home.dart';
 import 'package:onelife_app/app/modules/home/views/widgets/body_qr.dart';
 
-class HomeController extends GetxController with TextGraphQLProvider {
+class HomeController extends GetxController {
   final GlobalKey key = GlobalKey();
   final RxDouble height = 0.0.obs;
   final RxInt currentIndexPage = 0.obs;
@@ -16,10 +15,10 @@ class HomeController extends GetxController with TextGraphQLProvider {
   final Rx<MeModel> me = Get.find<UserService>().me;
 
   @override
-  void onReady() {
+  void onInit() {
     height.value = key.currentContext?.size?.height ?? 0;
 
-    super.onReady();
+    super.onInit();
   }
 
   final List<Widget> page = [
@@ -51,8 +50,5 @@ class HomeController extends GetxController with TextGraphQLProvider {
 
   void handlePressTopUp() {
     final bool checkAuth = Utils.checkIsAuth();
-    if (checkAuth) {
-      textFunc();
-    }
   }
 }

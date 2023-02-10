@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:onelife_app/app/common/logger/app_logger.dart';
-import 'package:onelife_app/app/data/graphql_service.dart';
+import 'package:onelife_app/app/data/graphql/graphql_service.dart';
 import 'package:onelife_app/app/data/services/user_service.dart';
 
 class GlobalBinding extends Bindings {

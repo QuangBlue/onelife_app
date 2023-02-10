@@ -110,7 +110,6 @@ class ProfileModel {
       data['tenant'] = tenant!.toJson();
     }
     data['socialIdentityProvider'] = socialIdentityProvider;
-
     data['phone'] = phone;
     data['email'] = email;
     data['firstName'] = firstName;

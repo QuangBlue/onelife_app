@@ -65,12 +65,13 @@ class BaseScaffold extends StatelessWidget {
       bottomNavigationBar: bottomNavigationBar != null
           ? Obx(
               () => AnimatedSize(
-                  duration: const Duration(milliseconds: 150),
-                  child: (showBottomNavigatorBar?.value ?? true.obs.value)
-                      ? BaseFooter(
-                          child: bottomNavigationBar,
-                        )
-                      : const SizedBox.shrink()),
+                duration: const Duration(milliseconds: 150),
+                child: (showBottomNavigatorBar?.value ?? true.obs.value)
+                    ? BaseFooter(
+                        child: bottomNavigationBar,
+                      )
+                    : const SizedBox.shrink(),
+              ),
             )
           : null,
     );

@@ -4,7 +4,7 @@ import 'package:onelife_app/app/common/values/app_colors.dart';
 
 abstract class SnackbarUtil {
   static showErrSnackbar(message,
-      {SnackPosition snackPosition = SnackPosition.BOTTOM}) {
+      {SnackPosition snackPosition = SnackPosition.TOP}) {
     Get.showSnackbar(GetSnackBar(
       duration: const Duration(seconds: 2),
       snackPosition: snackPosition,
@@ -20,7 +20,7 @@ abstract class SnackbarUtil {
   }
 
   static showSuccessSnackbar(String message,
-      {SnackPosition snackPosition = SnackPosition.BOTTOM}) {
+      {SnackPosition snackPosition = SnackPosition.TOP}) {
     Get.showSnackbar(GetSnackBar(
       duration: const Duration(seconds: 2),
       snackPosition: snackPosition,
@@ -40,7 +40,7 @@ abstract class SnackbarUtil {
   static showSnackbar(
       {required String message,
       Widget? icon,
-      SnackPosition snackPosition = SnackPosition.BOTTOM}) {
+      SnackPosition snackPosition = SnackPosition.TOP}) {
     Get.showSnackbar(GetSnackBar(
       duration: const Duration(seconds: 2),
       snackPosition: snackPosition,

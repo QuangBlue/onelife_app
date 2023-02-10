@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onelife_app/app/data/graphql/graphql_response.dart';
 import 'package:onelife_app/app/data/models/send_otp_model.dart';
-import 'package:onelife_app/app/data/providers/auth_providers.dart';
+import 'package:onelife_app/app/data/providers/query/send_otp_query.dart';
 import 'package:onelife_app/app/modules/login_pin_code/arguments/login_pin_code_arguments.dart';
 import 'package:onelife_app/app/routes/app_pages.dart';
 
-class LoginController extends GetxController with AuthProvider {
+class LoginController extends GetxController {
   final TextEditingController phoneNumberController = TextEditingController();
 
-  Future<void> handleLogin() async {
-    final SendOtpModel result = await sendOtp(phoneNumberController.text);
+  final SendOtpQuery sendOtpQuery = SendOtpQuery();
 
-    if (result.otpTrackingId?.isNotEmpty ?? false) {
+  Future<void> handleLogin() async {
+    final BaseResponse<SendOtpModel> result =
+        await sendOtpQuery.sendOtp(phoneNumberController.text);
+
+    if (result.data != null) {
       Get.toNamed(
         Routes.LOGIN_PIN_CODE,
         arguments: LoginPinCodeArguments(
-          sendOtp: result,
+          sendOtp: result.data!,
           phoneNumber: phoneNumberController.text,
         ),
       );
